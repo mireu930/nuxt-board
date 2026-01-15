@@ -36,14 +36,17 @@
       </form>
 
       <div class="social-login">
+      <div class="divider">
+        <span>또는</span>
+      </div>
+      
       <button class="google-btn" @click="loginWithGoogle">
-        <img src="" alt="Google" />
-        Google로 로그인
+        <img src="https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth/google.svg" alt="Google" />
+        Google 계정으로 로그인
       </button>
 
-      <button class="kakao-btn" @click="loginWithKakao">
-        <img src="" alt="Kakao" />
-        카카오로 로그인
+      <button class="kakao-btn-only" @click="loginWithKakao">
+        <img src="https://k.kakaocdn.net/14/dn/btroDszwNrM/I6efHub1SN5KCJqLm1Ovx1/o.jpg" alt="Kakao 로그인" />
       </button>
       </div>
       
@@ -228,5 +231,87 @@ h1 {
 
 .register-btn:hover {
   background-color: #e0e0e0;
+}
+
+.social-login {
+  margin-top: 25px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+/* 구분선 */
+.divider {
+  display: flex;
+  align-items: center;
+  color: #999;
+  font-size: 12px;
+  margin-bottom: 10px;
+}
+.divider::before, .divider::after {
+  content: "";
+  flex: 1;
+  height: 1px;
+  background: #eee;
+}
+.divider span {
+  padding: 0 10px;
+}
+
+/* 공통 버튼 */
+.google-btn, .kakao-btn {
+  width: 100%;
+  height: 45px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 8px; /* 요즘 스타일인 둥근 사각형 */
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  border: none;
+  transition: filter 0.2s;
+}
+
+.google-btn img, .kakao-btn img {
+  width: 18px;
+  height: 18px;
+  margin-right: 10px;
+}
+
+/* 구글 버튼: 화이트 테두리 스타일 */
+.google-btn {
+  background-color: #ffffff;
+  color: #1f1f1f;
+  border: 1px solid #dcdcdc;
+}
+
+.google-btn:hover {
+  background-color: #f7f8f8;
+}
+
+.kakao-btn-only {
+  width: 100%;       /* 부모 너비에 맞춤 */
+  height: 48px;     /* 버튼 높이 설정 */
+  padding: 0;        /* 안쪽 여백 제거 (중요) */
+  border: none;
+  border-radius: 6px;
+  overflow: hidden;  /* 이미지가 모서리를 넘어가지 않게 */
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #FEE500; /* 혹시 이미지가 로딩 안될 때를 위한 카카오색 */
+}
+
+.kakao-btn-only img {
+  width: 50%;       /* 버튼 너비에 꽉 채움 */
+  height: 100%;      /* 버튼 높이에 꽉 채움 */
+  object-fit: cover; /* 비율을 유지하면서 버튼 공간을 가득 채움 */
+  transition: transform 0.2s;
+}
+
+.kakao-btn-only:hover {
+  filter: brightness(0.9); /* 마우스 올렸을 때 살짝 어둡게 효과 */
 }
 </style>
