@@ -9,7 +9,7 @@ export default defineEventHandler(async (event) => {
     
     // 작성자 확인
     const [rows] = await pool.query(
-      'SELECT userid FROM tbl_board WHERE bno = ?',
+      'SELECT userid FROM nextict_tbl_board WHERE bno = ?',
       [id]
     );
     
@@ -29,7 +29,7 @@ export default defineEventHandler(async (event) => {
     
     // 게시물 삭제
     await pool.query(
-      'DELETE FROM tbl_board WHERE bno = ?',
+      'DELETE FROM nextict_tbl_board WHERE bno = ?',
       [id]
     );
     

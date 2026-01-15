@@ -17,7 +17,7 @@ export default defineEventHandler(async (event) => {
     
     // 중복 아이디 체크
     const [existing] = await pool.query(
-      'SELECT userid FROM tbl_user WHERE userid = ?',
+      'SELECT userid FROM nextict_tbl_user WHERE userid = ?',
       [body.userid]
     );
     
@@ -36,7 +36,7 @@ export default defineEventHandler(async (event) => {
     
     // 회원 등록
     await pool.query(
-      'INSERT INTO tbl_user (userid, name, password, email, job, hobbies, gender) VALUES (?, ?, ?, ?, ?, ?, ?)',
+      'INSERT INTO nextict_tbl_user (userid, name, password, email, job, hobbies, gender) VALUES (?, ?, ?, ?, ?, ?, ?)',
       [body.userid, body.name, hashedPassword, body.email, body.job, hobbies, body.gender]
     );
     

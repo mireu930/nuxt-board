@@ -5,7 +5,8 @@ let pool;
 export const getDbPool = () => {
   if (!pool) {
     pool = mysql.createPool({
-      host: 'localhost',
+      host: '125.133.91.90',
+      port: 3400,
       user: 'webmaster',
       password: '12345',
       database: 'webdev',

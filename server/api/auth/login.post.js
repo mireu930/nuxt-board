@@ -17,7 +17,7 @@ export default defineEventHandler(async (event) => {
     
     // 사용자 조회
     const [users] = await pool.query(
-      'SELECT userid, name, password FROM tbl_user WHERE userid = ?',
+      'SELECT userid, name, password FROM nextict_tbl_user WHERE userid = ?',
       [body.userid]
     );
     

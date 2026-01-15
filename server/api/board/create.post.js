@@ -17,7 +17,7 @@ export default defineEventHandler(async (event) => {
     
     // 게시물 등록 (userid와 writer는 로그인한 사용자 정보 사용)
     const [result] = await pool.query(
-      'INSERT INTO tbl_board (userid, writer, title, content, regDate) VALUES (?, ?, ?, ?, NOW())',
+      'INSERT INTO nextict_tbl_board (userid, writer, title, content, regDate) VALUES (?, ?, ?, ?, NOW())',
       [user.userid, user.name, body.title, body.content]
     );
     

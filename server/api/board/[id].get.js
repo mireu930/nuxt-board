@@ -7,13 +7,13 @@ export default defineEventHandler(async (event) => {
     
     // 조회수 증가
     await pool.query(
-      'UPDATE tbl_board SET hitno = hitno + 1 WHERE bno = ?',
+      'UPDATE nextict_tbl_board SET hitno = hitno + 1 WHERE bno = ?',
       [id]
     );
     
     // 게시물 조회
     const [rows] = await pool.query(
-      'SELECT bno, userid, writer, title, content, hitno, regDate FROM tbl_board WHERE bno = ?',
+      'SELECT bno, userid, writer, title, content, hitno, regDate FROM nextict_tbl_board WHERE bno = ?',
       [id]
     );
     
@@ -26,13 +26,13 @@ export default defineEventHandler(async (event) => {
     
     // 이전 게시물
     const [prevRows] = await pool.query(
-      'SELECT bno, title FROM tbl_board WHERE bno < ? ORDER BY bno DESC LIMIT 1',
+      'SELECT bno, title FROM nextict_tbl_board WHERE bno < ? ORDER BY bno DESC LIMIT 1',
       [id]
     );
     
     // 다음 게시물
     const [nextRows] = await pool.query(
-      'SELECT bno, title FROM tbl_board WHERE bno > ? ORDER BY bno ASC LIMIT 1',
+      'SELECT bno, title FROM nextict_tbl_board WHERE bno > ? ORDER BY bno ASC LIMIT 1',
       [id]
     );
     

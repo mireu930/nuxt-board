@@ -24,10 +24,10 @@ export default defineEventHandler(async (event) => {
         title, 
         hitno, 
         regDate,
-        (SELECT COUNT(*) FROM tbl_board) - (
-          SELECT COUNT(*) FROM tbl_board AS b2 WHERE b2.bno > tbl_board.bno
+        (SELECT COUNT(*) FROM nextict_tbl_board) - (
+          SELECT COUNT(*) FROM nextict_tbl_board AS b2 WHERE b2.bno > nextict_tbl_board.bno
         ) AS rownum
-      FROM tbl_board 
+      FROM nextict_tbl_board 
       ORDER BY bno DESC 
       LIMIT ? OFFSET ?`,
       [limit, offset]
