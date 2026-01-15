@@ -1454,7 +1454,22 @@ const plugins = [
 _WYzo9WHfQL85sz5s9LPS4qJNO6v7HwZddzTectC5xg
 ];
 
-const assets = {};
+const assets = {
+  "/index.mjs": {
+    "type": "text/javascript; charset=utf-8",
+    "etag": "\"17f42-LsXxoZirH5KSvPuNSsl3QRc0lz8\"",
+    "mtime": "2026-01-15T07:06:52.557Z",
+    "size": 98114,
+    "path": "index.mjs"
+  },
+  "/index.mjs.map": {
+    "type": "application/json",
+    "etag": "\"5c07c-bfDXPme4aXZg/lZ27AkPb0cTgus\"",
+    "mtime": "2026-01-15T07:06:52.557Z",
+    "size": 376956,
+    "path": "index.mjs.map"
+  }
+};
 
 function readAsset (id) {
   const serverDir = dirname$1(fileURLToPath(globalThis._importMeta_.url));
@@ -1560,7 +1575,12 @@ const _NEgSiY = defineEventHandler((event) => {
   const publicPaths = [
     "/api/auth/login",
     "/api/auth/register",
-    "/api/auth/logout"
+    "/api/auth/logout",
+    "/api/auth/google",
+    // 구글 로그인 시작
+    "/api/auth/kakao",
+    // 카카오 로그인 시작
+    "/api/auth/kakao/callback"
   ];
   if (publicPaths.some((path) => url.startsWith(path))) {
     return;
@@ -1907,6 +1927,8 @@ async function getIslandContext(event) {
   return ctx;
 }
 
+const _lazy_6Djn2m = () => Promise.resolve().then(function () { return google_get$1; });
+const _lazy_biY0Ub = () => Promise.resolve().then(function () { return kakao_get$1; });
 const _lazy_suBpL6 = () => Promise.resolve().then(function () { return login_post$1; });
 const _lazy_LZXqH1 = () => Promise.resolve().then(function () { return logout_post$1; });
 const _lazy_99LL5w = () => Promise.resolve().then(function () { return register_post$1; });
@@ -1920,6 +1942,8 @@ const _lazy_zGXLzp = () => Promise.resolve().then(function () { return renderer$
 const handlers = [
   { route: '', handler: _4H_PAk, lazy: false, middleware: true, method: undefined },
   { route: '', handler: _NEgSiY, lazy: false, middleware: true, method: undefined },
+  { route: '/api/auth/google', handler: _lazy_6Djn2m, lazy: true, middleware: false, method: "get" },
+  { route: '/api/auth/kakao', handler: _lazy_biY0Ub, lazy: true, middleware: false, method: "get" },
   { route: '/api/auth/login', handler: _lazy_suBpL6, lazy: true, middleware: false, method: "post" },
   { route: '/api/auth/logout', handler: _lazy_LZXqH1, lazy: true, middleware: false, method: "post" },
   { route: '/api/auth/register', handler: _lazy_99LL5w, lazy: true, middleware: false, method: "post" },
@@ -2259,6 +2283,45 @@ const styles = {};
 const styles$1 = /*#__PURE__*/Object.freeze(/*#__PURE__*/Object.defineProperty({
   __proto__: null,
   default: styles
+}, Symbol.toStringTag, { value: 'Module' }));
+
+const google_get = defineEventHandler(async (event) => {
+  const clientId = "YOUR_GOOGLE_CLIENT_ID.apps.googleusercontent.com";
+  const redirectUri = "http://localhost:3000/api/auth/google/callback";
+  const rootUrl = "https://accounts.google.com/o/oauth2/v2/auth";
+  const options = {
+    client_id: clientId,
+    redirect_uri: redirectUri,
+    response_type: "code",
+    scope: "openid email profile",
+    access_type: "offline",
+    prompt: "consent"
+  };
+  const queryString = new URLSearchParams(options).toString();
+  return sendRedirect(event, `${rootUrl}?${queryString}`);
+});
+
+const google_get$1 = /*#__PURE__*/Object.freeze(/*#__PURE__*/Object.defineProperty({
+  __proto__: null,
+  default: google_get
+}, Symbol.toStringTag, { value: 'Module' }));
+
+const kakao_get = defineEventHandler(async (event) => {
+  const restApiKey = "cf597e39aa8b460de022df377243f819";
+  const redirectUri = "http://localhost:3000/api/auth/kakao/callback";
+  const kakaoAuthUrl = "https://kauth.kakao.com/oauth/authorize";
+  const params = new URLSearchParams({
+    client_id: restApiKey,
+    redirect_uri: redirectUri,
+    response_type: "code"
+    // 인증 코드 방식으로 고정
+  }).toString();
+  return sendRedirect(event, `${kakaoAuthUrl}?${params}`);
+});
+
+const kakao_get$1 = /*#__PURE__*/Object.freeze(/*#__PURE__*/Object.defineProperty({
+  __proto__: null,
+  default: kakao_get
 }, Symbol.toStringTag, { value: 'Module' }));
 
 let pool;

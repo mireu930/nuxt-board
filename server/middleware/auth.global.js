@@ -8,7 +8,10 @@ export default defineEventHandler((event) => {
   const publicPaths = [
     '/api/auth/login',
     '/api/auth/register',
-    '/api/auth/logout'
+    '/api/auth/logout',
+    '/api/auth/google',  // 구글 로그인 시작
+    '/api/auth/kakao',   // 카카오 로그인 시작
+    '/api/auth/kakao/callback'
   ];
   
   // public 경로면 인증 체크 안 함

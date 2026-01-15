@@ -34,6 +34,18 @@
           {{ isLoading ? '로그인 중...' : '로그인' }}
         </button>
       </form>
+
+      <div class="social-login">
+      <button class="google-btn" @click="loginWithGoogle">
+        <img src="" alt="Google" />
+        Google로 로그인
+      </button>
+
+      <button class="kakao-btn" @click="loginWithKakao">
+        <img src="" alt="Kakao" />
+        카카오로 로그인
+      </button>
+      </div>
       
       <div class="register-link">
         <p>아직 회원이 아니신가요?</p>
@@ -46,6 +58,15 @@
 </template>
 
 <script setup>
+
+const loginWithGoogle = () => {
+  window.location.href = '/api/auth/google';
+};
+
+const loginWithKakao = () => {
+  window.location.href = '/api/auth/kakao';
+};
+
 definePageMeta({
   layout: false,
   //middleware: 'auth'  // 미들웨어 적용
