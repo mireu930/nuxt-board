@@ -6,6 +6,9 @@ declare module "nitropack/types" {
     '/api/auth/google': {
       'get': Simplify<Serialize<Awaited<ReturnType<typeof import('../../server/api/auth/google.get').default>>>>
     }
+    '/api/auth/google/callback': {
+      'get': Simplify<Serialize<Awaited<ReturnType<typeof import('../../server/api/auth/google/callback.get').default>>>>
+    }
     '/api/auth/kakao': {
       'get': Simplify<Serialize<Awaited<ReturnType<typeof import('../../server/api/auth/kakao.get').default>>>>
     }

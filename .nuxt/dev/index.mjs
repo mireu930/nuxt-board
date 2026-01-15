@@ -1913,6 +1913,7 @@ async function getIslandContext(event) {
 }
 
 const _lazy_6Djn2m = () => Promise.resolve().then(function () { return google_get$1; });
+const _lazy_6KkIuy = () => Promise.resolve().then(function () { return callback_get$1; });
 const _lazy_biY0Ub = () => Promise.resolve().then(function () { return kakao_get$1; });
 const _lazy_suBpL6 = () => Promise.resolve().then(function () { return login_post$1; });
 const _lazy_LZXqH1 = () => Promise.resolve().then(function () { return logout_post$1; });
@@ -1928,6 +1929,7 @@ const handlers = [
   { route: '', handler: _4H_PAk, lazy: false, middleware: true, method: undefined },
   { route: '', handler: _NEgSiY, lazy: false, middleware: true, method: undefined },
   { route: '/api/auth/google', handler: _lazy_6Djn2m, lazy: true, middleware: false, method: "get" },
+  { route: '/api/auth/google/callback', handler: _lazy_6KkIuy, lazy: true, middleware: false, method: "get" },
   { route: '/api/auth/kakao', handler: _lazy_biY0Ub, lazy: true, middleware: false, method: "get" },
   { route: '/api/auth/login', handler: _lazy_suBpL6, lazy: true, middleware: false, method: "post" },
   { route: '/api/auth/logout', handler: _lazy_LZXqH1, lazy: true, middleware: false, method: "post" },
@@ -2271,7 +2273,7 @@ const styles$1 = /*#__PURE__*/Object.freeze(/*#__PURE__*/Object.defineProperty({
 }, Symbol.toStringTag, { value: 'Module' }));
 
 const google_get = defineEventHandler(async (event) => {
-  const clientId = "YOUR_GOOGLE_CLIENT_ID.apps.googleusercontent.com";
+  const clientId = process.env.YOUR_GOOGLE_CLIENT_ID || "701767528169-4h2oqq8qnjgputbjrncjd3fhdlt1k3dp.apps.googleusercontent.com";
   const redirectUri = "http://localhost:3000/api/auth/google/callback";
   const rootUrl = "https://accounts.google.com/o/oauth2/v2/auth";
   const options = {
@@ -2291,6 +2293,87 @@ const google_get$1 = /*#__PURE__*/Object.freeze(/*#__PURE__*/Object.defineProper
   default: google_get
 }, Symbol.toStringTag, { value: 'Module' }));
 
+let pool;
+const getDbPool = () => {
+  if (!pool) {
+    pool = mysql.createPool({
+      host: "125.133.91.90",
+      port: 3400,
+      user: "webmaster",
+      password: "12345",
+      database: "webdev",
+      waitForConnections: true,
+      connectionLimit: 10,
+      queueLimit: 0
+    });
+  }
+  return pool;
+};
+
+const callback_get = defineEventHandler(async (event) => {
+  const query = getQuery$1(event);
+  const code = query.code;
+  if (!code) {
+    return sendRedirect(event, "/login?error=no_code");
+  }
+  try {
+    const tokenResponse = await $fetch("https://oauth2.googleapis.com/token", {
+      method: "POST",
+      body: {
+        code,
+        client_id: process.env.YOUR_GOOGLE_CLIENT_ID + ".apps.googleusercontent.com",
+        client_secret: process.env.YOUR_GOOGLE_CLIENT_SECRET,
+        redirect_uri: "http://localhost:3000/api/auth/google/callback",
+        grant_type: "authorization_code"
+      }
+    });
+    const googleUser = await $fetch("https://www.googleapis.com/oauth2/v3/userinfo", {
+      headers: { Authorization: `Bearer ${tokenResponse.access_token}` }
+    });
+    const pool = getDbPool();
+    const [users] = await pool.query(
+      "SELECT userid, name FROM nextict_tbl_user WHERE userid = ?",
+      [googleUser.email]
+    );
+    let user = users[0];
+    if (!user) {
+      const dummyPassword = "SOCIAL_LOGIN_USER";
+      await pool.query(
+        "INSERT INTO nextict_tbl_user (userid, name, password) VALUES (?, ?, ?)",
+        [googleUser.email, googleUser.name || "GoogleUser", dummyPassword]
+      );
+      user = { userid: googleUser.email, name: googleUser.name };
+    }
+    const token = generateToken({
+      userid: user.userid,
+      name: user.name
+    });
+    setCookie(event, "auth_token", token, {
+      httpOnly: false,
+      secure: false,
+      maxAge: 60 * 60 * 24,
+      path: "/"
+    });
+    setCookie(event, "user_name", user.name, {
+      maxAge: 60 * 60 * 24,
+      path: "/"
+    });
+    setCookie(event, "user_id", user.userid, {
+      maxAge: 60 * 60 * 24,
+      path: "/"
+    });
+    return sendRedirect(event, "/board/list");
+  } catch (error) {
+    console.error("Google Callback Error:", error);
+    return sendRedirect(event, "/login?error=" + encodeURIComponent(error.message));
+  }
+});
+
+const callback_get$1 = /*#__PURE__*/Object.freeze(/*#__PURE__*/Object.defineProperty({
+  __proto__: null,
+  default: callback_get
+}, Symbol.toStringTag, { value: 'Module' }));
+
 const kakao_get = defineEventHandler(async (event) => {
   const restApiKey = "cf597e39aa8b460de022df377243f819";
   const redirectUri = "http://localhost:3000/api/auth/kakao/callback";
@@ -2308,23 +2391,6 @@ const kakao_get$1 = /*#__PURE__*/Object.freeze(/*#__PURE__*/Object.definePropert
   __proto__: null,
   default: kakao_get
 }, Symbol.toStringTag, { value: 'Module' }));
-
-let pool;
-const getDbPool = () => {
-  if (!pool) {
-    pool = mysql.createPool({
-      host: "125.133.91.90",
-      port: 3400,
-      user: "webmaster",
-      password: "12345",
-      database: "webdev",
-      waitForConnections: true,
-      connectionLimit: 10,
-      queueLimit: 0
-    });
-  }
-  return pool;
-};
 
 const login_post = defineEventHandler(async (event) => {
   try {
