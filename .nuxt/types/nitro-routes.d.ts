@@ -15,6 +15,9 @@ declare module "nitropack/types" {
     '/api/auth/kakao/callback': {
       'get': Simplify<Serialize<Awaited<ReturnType<typeof import('../../server/api/auth/kakao/callback.get').default>>>>
     }
+    '/api/auth/kakao/logout-callback': {
+      'get': Simplify<Serialize<Awaited<ReturnType<typeof import('../../server/api/auth/kakao/logout-callback.get').default>>>>
+    }
     '/api/auth/login': {
       'post': Simplify<Serialize<Awaited<ReturnType<typeof import('../../server/api/auth/login.post').default>>>>
     }

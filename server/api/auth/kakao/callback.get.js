@@ -41,6 +41,10 @@ export default defineEventHandler(async (event) => {
     const token = generateToken({ userid: user.userid, name: user.name });
     setCookie(event, 'auth_token', token, { maxAge: 60 * 60 * 24, path: '/' });
     setCookie(event, 'user_name', user.name, { maxAge: 60 * 60 * 24, path: '/' });
+    setCookie(event, 'user_id', user.userid, {
+      maxAge: 60 * 60 * 24,
+      path: '/'
+    });
 
     return sendRedirect(event, '/board/list');
   } catch (error) {

@@ -1457,16 +1457,16 @@ _WYzo9WHfQL85sz5s9LPS4qJNO6v7HwZddzTectC5xg
 const assets = {
   "/index.mjs": {
     "type": "text/javascript; charset=utf-8",
-    "etag": "\"192ae-rB//fmLQLHQ7KDEL+xAIkRgxn9U\"",
-    "mtime": "2026-01-15T07:43:42.372Z",
-    "size": 103086,
+    "etag": "\"19700-Ks/PdduEM7uJ4nmmBMHmtpnTgSg\"",
+    "mtime": "2026-01-15T08:10:25.631Z",
+    "size": 104192,
     "path": "index.mjs"
   },
   "/index.mjs.map": {
     "type": "application/json",
-    "etag": "\"5fa50-aS9uIeo8cFlgrcrDA1lA24TMRJc\"",
-    "mtime": "2026-01-15T07:43:42.372Z",
-    "size": 391760,
+    "etag": "\"606e6-vV+2qAgNp9RHTCi1O+bfrjATKZc\"",
+    "mtime": "2026-01-15T08:10:25.631Z",
+    "size": 394982,
     "path": "index.mjs.map"
   }
 };
@@ -1931,6 +1931,7 @@ const _lazy_6Djn2m = () => Promise.resolve().then(function () { return google_ge
 const _lazy_6KkIuy = () => Promise.resolve().then(function () { return callback_get$3; });
 const _lazy_biY0Ub = () => Promise.resolve().then(function () { return kakao_get$1; });
 const _lazy_PgmA0y = () => Promise.resolve().then(function () { return callback_get$1; });
+const _lazy_55ITF7 = () => Promise.resolve().then(function () { return logoutCallback_get$1; });
 const _lazy_suBpL6 = () => Promise.resolve().then(function () { return login_post$1; });
 const _lazy_LZXqH1 = () => Promise.resolve().then(function () { return logout_post$1; });
 const _lazy_99LL5w = () => Promise.resolve().then(function () { return register_post$1; });
@@ -1948,6 +1949,7 @@ const handlers = [
   { route: '/api/auth/google/callback', handler: _lazy_6KkIuy, lazy: true, middleware: false, method: "get" },
   { route: '/api/auth/kakao', handler: _lazy_biY0Ub, lazy: true, middleware: false, method: "get" },
   { route: '/api/auth/kakao/callback', handler: _lazy_PgmA0y, lazy: true, middleware: false, method: "get" },
+  { route: '/api/auth/kakao/logout-callback', handler: _lazy_55ITF7, lazy: true, middleware: false, method: "get" },
   { route: '/api/auth/login', handler: _lazy_suBpL6, lazy: true, middleware: false, method: "post" },
   { route: '/api/auth/logout', handler: _lazy_LZXqH1, lazy: true, middleware: false, method: "post" },
   { route: '/api/auth/register', handler: _lazy_99LL5w, lazy: true, middleware: false, method: "post" },
@@ -2439,6 +2441,10 @@ const callback_get = defineEventHandler(async (event) => {
     const token = generateToken({ userid: user.userid, name: user.name });
     setCookie(event, "auth_token", token, { maxAge: 60 * 60 * 24, path: "/" });
     setCookie(event, "user_name", user.name, { maxAge: 60 * 60 * 24, path: "/" });
+    setCookie(event, "user_id", user.userid, {
+      maxAge: 60 * 60 * 24,
+      path: "/"
+    });
     return sendRedirect(event, "/board/list");
   } catch (error) {
     console.error("Kakao Error:", error);
@@ -2449,6 +2455,18 @@ const callback_get = defineEventHandler(async (event) => {
 const callback_get$1 = /*#__PURE__*/Object.freeze(/*#__PURE__*/Object.defineProperty({
   __proto__: null,
   default: callback_get
+}, Symbol.toStringTag, { value: 'Module' }));
+
+const logoutCallback_get = defineEventHandler((event) => {
+  deleteCookie(event, "auth_token", { path: "/" });
+  deleteCookie(event, "user_id", { path: "/" });
+  deleteCookie(event, "user_name", { path: "/" });
+  return sendRedirect(event, "/");
+});
+
+const logoutCallback_get$1 = /*#__PURE__*/Object.freeze(/*#__PURE__*/Object.defineProperty({
+  __proto__: null,
+  default: logoutCallback_get
 }, Symbol.toStringTag, { value: 'Module' }));
 
 const login_post = defineEventHandler(async (event) => {
@@ -2519,13 +2537,28 @@ const login_post$1 = /*#__PURE__*/Object.freeze(/*#__PURE__*/Object.defineProper
   default: login_post
 }, Symbol.toStringTag, { value: 'Module' }));
 
-const logout_post = defineEventHandler((event) => {
-  deleteCookie(event, "auth_token");
-  deleteCookie(event, "user_name");
-  deleteCookie(event, "user_id");
+const logout_post = defineEventHandler(async (event) => {
+  const userId = getCookie(event, "user_id");
+  let socialType;
+  if (userId) {
+    const pool = getDbPool();
+    const [rows] = await pool.query(
+      "SELECT social FROM nextict_tbl_user WHERE userid = ?",
+      [userId]
+    );
+    if (rows.length > 0) {
+      socialType = rows[0].social;
+    }
+  }
+  if (socialType !== "2" && socialType !== "kakao") {
+    deleteCookie(event, "auth_token", { path: "/" });
+    deleteCookie(event, "user_id", { path: "/" });
+    deleteCookie(event, "user_name", { path: "/" });
+  }
   return {
     success: true,
-    message: "\uB85C\uADF8\uC544\uC6C3\uB418\uC5C8\uC2B5\uB2C8\uB2E4."
+    socialType,
+    kakaoApiKey: process.env.KAKAO_REST_API_KEY
   };
 });
 

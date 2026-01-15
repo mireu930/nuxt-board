@@ -151,9 +151,17 @@ const goToView = (bno) => {
 
 const handleLogout = async () => {
   try {
-    await $fetch('/api/auth/logout', {
+    const response = await $fetch('/api/auth/logout', {
       method: 'POST'
     });
+
+    if (response.socialType === '2' || response.socialType === 'kakao') {
+      const restApiKey = response.kakaoApiKey;
+      const logoutRedirectUri = 'http://localhost:3000/api/auth/kakao/logout-callback';
+      
+      window.location.href = `https://kauth.kakao.com/oauth/logout?client_id=${restApiKey}&logout_redirect_uri=${logoutRedirectUri}`;
+      return;
+    }
     
     // 쿠키 삭제
     const authToken = useCookie('auth_token');
