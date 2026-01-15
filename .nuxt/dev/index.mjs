@@ -1,46 +1,46 @@
 import process from 'node:process';globalThis._importMeta_={url:import.meta.url,env:process.env};import { tmpdir } from 'node:os';
+import { defineEventHandler, handleCacheHeaders, splitCookiesString, createEvent, fetchWithEvent, isEvent, eventHandler, setHeaders, sendRedirect, proxyRequest, getRequestHeader, setResponseHeaders, setResponseStatus, send, getRequestHeaders, setResponseHeader, appendResponseHeader, getRequestURL, getResponseHeader, removeResponseHeader, createError, getCookie, getQuery as getQuery$1, readBody, createApp, createRouter as createRouter$1, toNodeListener, lazyEventHandler, getResponseStatus, getRouterParam, setCookie, deleteCookie, getResponseStatusText } from 'file:///Users/minyeollee/Desktop/nuxt-board/node_modules/h3/dist/index.mjs';
 import { Server } from 'node:http';
 import { resolve, dirname, join } from 'node:path';
 import nodeCrypto from 'node:crypto';
 import { parentPort, threadId } from 'node:worker_threads';
-import { defineEventHandler, handleCacheHeaders, splitCookiesString, createEvent, fetchWithEvent, isEvent, eventHandler, setHeaders, sendRedirect, proxyRequest, getRequestHeader, setResponseHeaders, setResponseStatus, send, getRequestHeaders, setResponseHeader, appendResponseHeader, getRequestURL, getResponseHeader, removeResponseHeader, createError, getCookie, getQuery as getQuery$1, readBody, createApp, createRouter as createRouter$1, toNodeListener, lazyEventHandler, getResponseStatus, getRouterParam, setCookie, deleteCookie, getResponseStatusText } from 'file://C:/my-app/nuxt-board/node_modules/h3/dist/index.mjs';
-import { escapeHtml } from 'file://C:/my-app/nuxt-board/node_modules/@vue/shared/dist/shared.cjs.js';
-import bcrypt from 'file://C:/my-app/nuxt-board/node_modules/bcrypt/bcrypt.js';
-import mysql from 'file://C:/my-app/nuxt-board/node_modules/mysql2/promise.js';
-import { createRenderer, getRequestDependencies, getPreloadLinks, getPrefetchLinks } from 'file://C:/my-app/nuxt-board/node_modules/vue-bundle-renderer/dist/runtime.mjs';
-import { parseURL, withoutBase, joinURL, getQuery, withQuery, withTrailingSlash, decodePath, withLeadingSlash, withoutTrailingSlash, joinRelativeURL } from 'file://C:/my-app/nuxt-board/node_modules/ufo/dist/index.mjs';
+import { escapeHtml } from 'file:///Users/minyeollee/Desktop/nuxt-board/node_modules/@vue/shared/dist/shared.cjs.js';
+import bcrypt from 'file:///Users/minyeollee/Desktop/nuxt-board/node_modules/bcrypt/bcrypt.js';
+import mysql from 'file:///Users/minyeollee/Desktop/nuxt-board/node_modules/mysql2/promise.js';
+import { createRenderer, getRequestDependencies, getPreloadLinks, getPrefetchLinks } from 'file:///Users/minyeollee/Desktop/nuxt-board/node_modules/vue-bundle-renderer/dist/runtime.mjs';
+import { parseURL, withoutBase, joinURL, getQuery, withQuery, withTrailingSlash, decodePath, withLeadingSlash, withoutTrailingSlash, joinRelativeURL } from 'file:///Users/minyeollee/Desktop/nuxt-board/node_modules/ufo/dist/index.mjs';
 import process$1 from 'node:process';
-import { renderToString } from 'file://C:/my-app/nuxt-board/node_modules/vue/server-renderer/index.mjs';
-import { klona } from 'file://C:/my-app/nuxt-board/node_modules/klona/dist/index.mjs';
-import defu, { defuFn } from 'file://C:/my-app/nuxt-board/node_modules/defu/dist/defu.mjs';
-import destr, { destr as destr$1 } from 'file://C:/my-app/nuxt-board/node_modules/destr/dist/index.mjs';
-import { snakeCase } from 'file://C:/my-app/nuxt-board/node_modules/scule/dist/index.mjs';
-import { createHead as createHead$1, propsToString, renderSSRHead } from 'file://C:/my-app/nuxt-board/node_modules/unhead/dist/server.mjs';
-import { stringify, uneval } from 'file://C:/my-app/nuxt-board/node_modules/devalue/index.js';
-import { isVNode, toValue, isRef } from 'file://C:/my-app/nuxt-board/node_modules/vue/index.mjs';
-import { DeprecationsPlugin, PromisesPlugin, TemplateParamsPlugin, AliasSortingPlugin } from 'file://C:/my-app/nuxt-board/node_modules/unhead/dist/plugins.mjs';
-import { createHooks } from 'file://C:/my-app/nuxt-board/node_modules/hookable/dist/index.mjs';
-import { createFetch, Headers as Headers$1 } from 'file://C:/my-app/nuxt-board/node_modules/ofetch/dist/node.mjs';
-import { fetchNodeRequestHandler, callNodeRequestHandler } from 'file://C:/my-app/nuxt-board/node_modules/node-mock-http/dist/index.mjs';
-import { createStorage, prefixStorage } from 'file://C:/my-app/nuxt-board/node_modules/unstorage/dist/index.mjs';
-import unstorage_47drivers_47fs from 'file://C:/my-app/nuxt-board/node_modules/unstorage/drivers/fs.mjs';
-import { digest } from 'file://C:/my-app/nuxt-board/node_modules/ohash/dist/index.mjs';
-import { toRouteMatcher, createRouter } from 'file://C:/my-app/nuxt-board/node_modules/radix3/dist/index.mjs';
+import { renderToString } from 'file:///Users/minyeollee/Desktop/nuxt-board/node_modules/vue/server-renderer/index.mjs';
+import destr, { destr as destr$1 } from 'file:///Users/minyeollee/Desktop/nuxt-board/node_modules/destr/dist/index.mjs';
+import { createHooks } from 'file:///Users/minyeollee/Desktop/nuxt-board/node_modules/hookable/dist/index.mjs';
+import { createFetch, Headers as Headers$1 } from 'file:///Users/minyeollee/Desktop/nuxt-board/node_modules/ofetch/dist/node.mjs';
+import { fetchNodeRequestHandler, callNodeRequestHandler } from 'file:///Users/minyeollee/Desktop/nuxt-board/node_modules/node-mock-http/dist/index.mjs';
+import { createStorage, prefixStorage } from 'file:///Users/minyeollee/Desktop/nuxt-board/node_modules/unstorage/dist/index.mjs';
+import unstorage_47drivers_47fs from 'file:///Users/minyeollee/Desktop/nuxt-board/node_modules/unstorage/drivers/fs.mjs';
+import { digest } from 'file:///Users/minyeollee/Desktop/nuxt-board/node_modules/ohash/dist/index.mjs';
+import { klona } from 'file:///Users/minyeollee/Desktop/nuxt-board/node_modules/klona/dist/index.mjs';
+import defu, { defuFn } from 'file:///Users/minyeollee/Desktop/nuxt-board/node_modules/defu/dist/defu.mjs';
+import { snakeCase } from 'file:///Users/minyeollee/Desktop/nuxt-board/node_modules/scule/dist/index.mjs';
+import { getContext } from 'file:///Users/minyeollee/Desktop/nuxt-board/node_modules/unctx/dist/index.mjs';
+import { toRouteMatcher, createRouter } from 'file:///Users/minyeollee/Desktop/nuxt-board/node_modules/radix3/dist/index.mjs';
 import { readFile } from 'node:fs/promises';
-import consola, { consola as consola$1 } from 'file://C:/my-app/nuxt-board/node_modules/consola/dist/index.mjs';
-import { ErrorParser } from 'file://C:/my-app/nuxt-board/node_modules/youch-core/build/index.js';
-import { Youch } from 'file://C:/my-app/nuxt-board/node_modules/youch/build/index.js';
-import { SourceMapConsumer } from 'file://C:/my-app/nuxt-board/node_modules/source-map/source-map.js';
+import consola, { consola as consola$1 } from 'file:///Users/minyeollee/Desktop/nuxt-board/node_modules/consola/dist/index.mjs';
+import { ErrorParser } from 'file:///Users/minyeollee/Desktop/nuxt-board/node_modules/youch-core/build/index.js';
+import { Youch } from 'file:///Users/minyeollee/Desktop/nuxt-board/node_modules/youch/build/index.js';
+import { SourceMapConsumer } from 'file:///Users/minyeollee/Desktop/nuxt-board/node_modules/source-map/source-map.js';
 import { AsyncLocalStorage } from 'node:async_hooks';
-import { getContext } from 'file://C:/my-app/nuxt-board/node_modules/unctx/dist/index.mjs';
-import { captureRawStackTrace, parseRawStackTrace } from 'file://C:/my-app/nuxt-board/node_modules/errx/dist/index.js';
+import { stringify, uneval } from 'file:///Users/minyeollee/Desktop/nuxt-board/node_modules/devalue/index.js';
+import { captureRawStackTrace, parseRawStackTrace } from 'file:///Users/minyeollee/Desktop/nuxt-board/node_modules/errx/dist/index.js';
+import { isVNode, toValue, isRef } from 'file:///Users/minyeollee/Desktop/nuxt-board/node_modules/vue/index.mjs';
 import { promises } from 'node:fs';
 import { fileURLToPath } from 'node:url';
-import { dirname as dirname$1, resolve as resolve$1 } from 'file://C:/my-app/nuxt-board/node_modules/pathe/dist/index.mjs';
-import jwt from 'file://C:/my-app/nuxt-board/node_modules/jsonwebtoken/index.js';
-import { walkResolver } from 'file://C:/my-app/nuxt-board/node_modules/unhead/dist/utils.mjs';
+import { dirname as dirname$1, resolve as resolve$1 } from 'file:///Users/minyeollee/Desktop/nuxt-board/node_modules/pathe/dist/index.mjs';
+import jwt from 'file:///Users/minyeollee/Desktop/nuxt-board/node_modules/jsonwebtoken/index.js';
+import { createHead as createHead$1, propsToString, renderSSRHead } from 'file:///Users/minyeollee/Desktop/nuxt-board/node_modules/unhead/dist/server.mjs';
+import { DeprecationsPlugin, PromisesPlugin, TemplateParamsPlugin, AliasSortingPlugin } from 'file:///Users/minyeollee/Desktop/nuxt-board/node_modules/unhead/dist/plugins.mjs';
+import { walkResolver } from 'file:///Users/minyeollee/Desktop/nuxt-board/node_modules/unhead/dist/utils.mjs';
 
-const serverAssets = [{"baseName":"server","dir":"C:/my-app/nuxt-board/server/assets"}];
+const serverAssets = [{"baseName":"server","dir":"/Users/minyeollee/Desktop/nuxt-board/server/assets"}];
 
 const assets$1 = createStorage();
 
@@ -52,11 +52,11 @@ const storage = createStorage({});
 
 storage.mount('/assets', assets$1);
 
-storage.mount('root', unstorage_47drivers_47fs({"driver":"fs","readOnly":true,"base":"C:/my-app/nuxt-board","watchOptions":{"ignored":[null]}}));
-storage.mount('src', unstorage_47drivers_47fs({"driver":"fs","readOnly":true,"base":"C:/my-app/nuxt-board/server","watchOptions":{"ignored":[null]}}));
-storage.mount('build', unstorage_47drivers_47fs({"driver":"fs","readOnly":false,"base":"C:/my-app/nuxt-board/.nuxt"}));
-storage.mount('cache', unstorage_47drivers_47fs({"driver":"fs","readOnly":false,"base":"C:/my-app/nuxt-board/.nuxt/cache"}));
-storage.mount('data', unstorage_47drivers_47fs({"driver":"fs","base":"C:/my-app/nuxt-board/.data/kv"}));
+storage.mount('root', unstorage_47drivers_47fs({"driver":"fs","readOnly":true,"base":"/Users/minyeollee/Desktop/nuxt-board","watchOptions":{"ignored":[null]}}));
+storage.mount('src', unstorage_47drivers_47fs({"driver":"fs","readOnly":true,"base":"/Users/minyeollee/Desktop/nuxt-board/server","watchOptions":{"ignored":[null]}}));
+storage.mount('build', unstorage_47drivers_47fs({"driver":"fs","readOnly":false,"base":"/Users/minyeollee/Desktop/nuxt-board/.nuxt"}));
+storage.mount('cache', unstorage_47drivers_47fs({"driver":"fs","readOnly":false,"base":"/Users/minyeollee/Desktop/nuxt-board/.nuxt/cache"}));
+storage.mount('data', unstorage_47drivers_47fs({"driver":"fs","base":"/Users/minyeollee/Desktop/nuxt-board/.data/kv"}));
 
 function useStorage(base = "") {
   return base ? prefixStorage(storage, base) : storage;
@@ -695,6 +695,11 @@ new Proxy(/* @__PURE__ */ Object.create(null), {
     }
     return void 0;
   }
+});
+
+getContext("nitro-app", {
+  asyncContext: false,
+  AsyncLocalStorage: void 0
 });
 
 const config = useRuntimeConfig();
@@ -1355,13 +1360,13 @@ if (!window.__NUXT_DEVTOOLS_TIME_METRIC__) {
 window.__NUXT_DEVTOOLS_TIME_METRIC__.appInit = Date.now()
 `;
 
-const _iu4fJmdykRbw7N1GxWgUVUxk_O3ITVRVWOolLz4lJI = (function(nitro) {
+const _j5u2o2lzhw9mY9UC3ETDgerBrSCsbRHgppQVOWQOSQ = (function(nitro) {
   nitro.hooks.hook("render:html", (htmlContext) => {
     htmlContext.head.push(`<script>${script}<\/script>`);
   });
 });
 
-const rootDir = "C:/my-app/nuxt-board";
+const rootDir = "/Users/minyeollee/Desktop/nuxt-board";
 
 const appHead = {"meta":[{"name":"viewport","content":"width=device-width, initial-scale=1"},{"charset":"utf-8"}],"link":[],"style":[],"script":[],"noscript":[]};
 
@@ -1380,7 +1385,7 @@ const devReducers = {
   URL: (data) => data instanceof URL ? data.toString() : void 0
 };
 const asyncContext = getContext("nuxt-dev", { asyncContext: true, AsyncLocalStorage });
-const _WYzo9WHfQL85sz5s9LPS4qJNO6v7HwZddzTectC5xg = (nitroApp) => {
+const _BNjWxFy4SwPNMZCW3paBus0_Oy6S3mXniylMtmWkhfA = (nitroApp) => {
   const handler = nitroApp.h3App.handler;
   nitroApp.h3App.handler = (event) => {
     return asyncContext.callAsync({ logs: [], event }, () => handler(event));
@@ -1450,26 +1455,11 @@ function onConsoleLog(callback) {
 }
 
 const plugins = [
-  _iu4fJmdykRbw7N1GxWgUVUxk_O3ITVRVWOolLz4lJI,
-_WYzo9WHfQL85sz5s9LPS4qJNO6v7HwZddzTectC5xg
+  _j5u2o2lzhw9mY9UC3ETDgerBrSCsbRHgppQVOWQOSQ,
+_BNjWxFy4SwPNMZCW3paBus0_Oy6S3mXniylMtmWkhfA
 ];
 
-const assets = {
-  "/index.mjs": {
-    "type": "text/javascript; charset=utf-8",
-    "etag": "\"19700-Ks/PdduEM7uJ4nmmBMHmtpnTgSg\"",
-    "mtime": "2026-01-15T08:10:25.631Z",
-    "size": 104192,
-    "path": "index.mjs"
-  },
-  "/index.mjs.map": {
-    "type": "application/json",
-    "etag": "\"606e6-vV+2qAgNp9RHTCi1O+bfrjATKZc\"",
-    "mtime": "2026-01-15T08:10:25.631Z",
-    "size": 394982,
-    "path": "index.mjs.map"
-  }
-};
+const assets = {};
 
 function readAsset (id) {
   const serverDir = dirname$1(fileURLToPath(globalThis._importMeta_.url));
@@ -1494,7 +1484,7 @@ function getAsset (id) {
 
 const METHODS = /* @__PURE__ */ new Set(["HEAD", "GET"]);
 const EncodingMap = { gzip: ".gz", br: ".br" };
-const _4H_PAk = eventHandler((event) => {
+const _o1LFSU = eventHandler((event) => {
   if (event.method && !METHODS.has(event.method)) {
     return;
   }
@@ -1570,7 +1560,7 @@ const verifyToken = (token) => {
   }
 };
 
-const _NEgSiY = defineEventHandler((event) => {
+const _3cvdP6 = defineEventHandler((event) => {
   const url = getRequestURL(event).pathname;
   const publicPaths = [
     "/api/auth/login",
@@ -1680,8 +1670,8 @@ function publicAssetsURL(...path) {
 
 const APP_ROOT_OPEN_TAG = `<${appRootTag}${propsToString(appRootAttrs)}>`;
 const APP_ROOT_CLOSE_TAG = `</${appRootTag}>`;
-const getServerEntry = () => import('file://C:/my-app/nuxt-board/.nuxt//dist/server/server.mjs').then((r) => r.default || r);
-const getClientManifest = () => import('file://C:/my-app/nuxt-board/.nuxt//dist/server/client.manifest.mjs').then((r) => r.default || r).then((r) => typeof r === "function" ? r() : r);
+const getServerEntry = () => import('file:///Users/minyeollee/Desktop/nuxt-board/.nuxt//dist/server/server.mjs').then((r) => r.default || r);
+const getClientManifest = () => import('file:///Users/minyeollee/Desktop/nuxt-board/.nuxt//dist/server/client.manifest.mjs').then((r) => r.default || r).then((r) => typeof r === "function" ? r() : r);
 const getSSRRenderer = lazyCachedFunction(async () => {
   const createSSRApp = await getServerEntry();
   if (!createSSRApp) {
@@ -1927,40 +1917,40 @@ async function getIslandContext(event) {
   return ctx;
 }
 
-const _lazy_6Djn2m = () => Promise.resolve().then(function () { return google_get$1; });
-const _lazy_6KkIuy = () => Promise.resolve().then(function () { return callback_get$3; });
-const _lazy_biY0Ub = () => Promise.resolve().then(function () { return kakao_get$1; });
-const _lazy_PgmA0y = () => Promise.resolve().then(function () { return callback_get$1; });
-const _lazy_55ITF7 = () => Promise.resolve().then(function () { return logoutCallback_get$1; });
-const _lazy_suBpL6 = () => Promise.resolve().then(function () { return login_post$1; });
-const _lazy_LZXqH1 = () => Promise.resolve().then(function () { return logout_post$1; });
-const _lazy_99LL5w = () => Promise.resolve().then(function () { return register_post$1; });
-const _lazy_5DZpUC = () => Promise.resolve().then(function () { return _id__delete$1; });
-const _lazy_NB07Bw = () => Promise.resolve().then(function () { return _id__get$1; });
-const _lazy_hmqvgz = () => Promise.resolve().then(function () { return _id__put$1; });
-const _lazy_719Tq5 = () => Promise.resolve().then(function () { return create_post$1; });
-const _lazy_pkkdL8 = () => Promise.resolve().then(function () { return boards$1; });
-const _lazy_zGXLzp = () => Promise.resolve().then(function () { return renderer$1; });
+const _lazy_opuJy6 = () => Promise.resolve().then(function () { return google_get$1; });
+const _lazy_T0jsK_ = () => Promise.resolve().then(function () { return callback_get$3; });
+const _lazy_drLnLe = () => Promise.resolve().then(function () { return kakao_get$1; });
+const _lazy_Mu2ATD = () => Promise.resolve().then(function () { return callback_get$1; });
+const _lazy_63d7xL = () => Promise.resolve().then(function () { return logoutCallback_get$1; });
+const _lazy_DFGen6 = () => Promise.resolve().then(function () { return login_post$1; });
+const _lazy_68fXCa = () => Promise.resolve().then(function () { return logout_post$1; });
+const _lazy_kgzdoc = () => Promise.resolve().then(function () { return register_post$1; });
+const _lazy_XrU_Sw = () => Promise.resolve().then(function () { return _id__delete$1; });
+const _lazy_VqxTrZ = () => Promise.resolve().then(function () { return _id__get$1; });
+const _lazy_nXwRBm = () => Promise.resolve().then(function () { return _id__put$1; });
+const _lazy_tHDkve = () => Promise.resolve().then(function () { return create_post$1; });
+const _lazy_0IhAoI = () => Promise.resolve().then(function () { return boards$1; });
+const _lazy_rDnrWP = () => Promise.resolve().then(function () { return renderer$1; });
 
 const handlers = [
-  { route: '', handler: _4H_PAk, lazy: false, middleware: true, method: undefined },
-  { route: '', handler: _NEgSiY, lazy: false, middleware: true, method: undefined },
-  { route: '/api/auth/google', handler: _lazy_6Djn2m, lazy: true, middleware: false, method: "get" },
-  { route: '/api/auth/google/callback', handler: _lazy_6KkIuy, lazy: true, middleware: false, method: "get" },
-  { route: '/api/auth/kakao', handler: _lazy_biY0Ub, lazy: true, middleware: false, method: "get" },
-  { route: '/api/auth/kakao/callback', handler: _lazy_PgmA0y, lazy: true, middleware: false, method: "get" },
-  { route: '/api/auth/kakao/logout-callback', handler: _lazy_55ITF7, lazy: true, middleware: false, method: "get" },
-  { route: '/api/auth/login', handler: _lazy_suBpL6, lazy: true, middleware: false, method: "post" },
-  { route: '/api/auth/logout', handler: _lazy_LZXqH1, lazy: true, middleware: false, method: "post" },
-  { route: '/api/auth/register', handler: _lazy_99LL5w, lazy: true, middleware: false, method: "post" },
-  { route: '/api/board/:id', handler: _lazy_5DZpUC, lazy: true, middleware: false, method: "delete" },
-  { route: '/api/board/:id', handler: _lazy_NB07Bw, lazy: true, middleware: false, method: "get" },
-  { route: '/api/board/:id', handler: _lazy_hmqvgz, lazy: true, middleware: false, method: "put" },
-  { route: '/api/board/create', handler: _lazy_719Tq5, lazy: true, middleware: false, method: "post" },
-  { route: '/api/boards', handler: _lazy_pkkdL8, lazy: true, middleware: false, method: undefined },
-  { route: '/__nuxt_error', handler: _lazy_zGXLzp, lazy: true, middleware: false, method: undefined },
+  { route: '', handler: _o1LFSU, lazy: false, middleware: true, method: undefined },
+  { route: '', handler: _3cvdP6, lazy: false, middleware: true, method: undefined },
+  { route: '/api/auth/google', handler: _lazy_opuJy6, lazy: true, middleware: false, method: "get" },
+  { route: '/api/auth/google/callback', handler: _lazy_T0jsK_, lazy: true, middleware: false, method: "get" },
+  { route: '/api/auth/kakao', handler: _lazy_drLnLe, lazy: true, middleware: false, method: "get" },
+  { route: '/api/auth/kakao/callback', handler: _lazy_Mu2ATD, lazy: true, middleware: false, method: "get" },
+  { route: '/api/auth/kakao/logout-callback', handler: _lazy_63d7xL, lazy: true, middleware: false, method: "get" },
+  { route: '/api/auth/login', handler: _lazy_DFGen6, lazy: true, middleware: false, method: "post" },
+  { route: '/api/auth/logout', handler: _lazy_68fXCa, lazy: true, middleware: false, method: "post" },
+  { route: '/api/auth/register', handler: _lazy_kgzdoc, lazy: true, middleware: false, method: "post" },
+  { route: '/api/board/:id', handler: _lazy_XrU_Sw, lazy: true, middleware: false, method: "delete" },
+  { route: '/api/board/:id', handler: _lazy_VqxTrZ, lazy: true, middleware: false, method: "get" },
+  { route: '/api/board/:id', handler: _lazy_nXwRBm, lazy: true, middleware: false, method: "put" },
+  { route: '/api/board/create', handler: _lazy_tHDkve, lazy: true, middleware: false, method: "post" },
+  { route: '/api/boards', handler: _lazy_0IhAoI, lazy: true, middleware: false, method: undefined },
+  { route: '/__nuxt_error', handler: _lazy_rDnrWP, lazy: true, middleware: false, method: undefined },
   { route: '/__nuxt_island/**', handler: _SxA8c9, lazy: false, middleware: false, method: undefined },
-  { route: '/**', handler: _lazy_zGXLzp, lazy: true, middleware: false, method: undefined }
+  { route: '/**', handler: _lazy_rDnrWP, lazy: true, middleware: false, method: undefined }
 ];
 
 function createNitroApp() {
