@@ -36,7 +36,7 @@ export default defineEventHandler(async (event) => {
     
     // 회원 등록
     await pool.query(
-      'INSERT INTO nextict_tbl_user (userid, name, password, email, job, hobbies, gender) VALUES (?, ?, ?, ?, ?, ?, ?)',
+      'INSERT INTO nextict_tbl_user (userid, name, password, email, job, hobbies, gender, social) VALUES (?, ?, ?, ?, ?, ?, ?, 0)',
       [body.userid, body.name, hashedPassword, body.email, body.job, hobbies, body.gender]
     );
     

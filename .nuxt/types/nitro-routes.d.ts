@@ -12,6 +12,9 @@ declare module "nitropack/types" {
     '/api/auth/kakao': {
       'get': Simplify<Serialize<Awaited<ReturnType<typeof import('../../server/api/auth/kakao.get').default>>>>
     }
+    '/api/auth/kakao/callback': {
+      'get': Simplify<Serialize<Awaited<ReturnType<typeof import('../../server/api/auth/kakao/callback.get').default>>>>
+    }
     '/api/auth/login': {
       'post': Simplify<Serialize<Awaited<ReturnType<typeof import('../../server/api/auth/login.post').default>>>>
     }

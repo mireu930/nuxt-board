@@ -1454,7 +1454,22 @@ const plugins = [
 _WYzo9WHfQL85sz5s9LPS4qJNO6v7HwZddzTectC5xg
 ];
 
-const assets = {};
+const assets = {
+  "/index.mjs": {
+    "type": "text/javascript; charset=utf-8",
+    "etag": "\"192ae-rB//fmLQLHQ7KDEL+xAIkRgxn9U\"",
+    "mtime": "2026-01-15T07:43:42.372Z",
+    "size": 103086,
+    "path": "index.mjs"
+  },
+  "/index.mjs.map": {
+    "type": "application/json",
+    "etag": "\"5fa50-aS9uIeo8cFlgrcrDA1lA24TMRJc\"",
+    "mtime": "2026-01-15T07:43:42.372Z",
+    "size": 391760,
+    "path": "index.mjs.map"
+  }
+};
 
 function readAsset (id) {
   const serverDir = dirname$1(fileURLToPath(globalThis._importMeta_.url));
@@ -1913,8 +1928,9 @@ async function getIslandContext(event) {
 }
 
 const _lazy_6Djn2m = () => Promise.resolve().then(function () { return google_get$1; });
-const _lazy_6KkIuy = () => Promise.resolve().then(function () { return callback_get$1; });
+const _lazy_6KkIuy = () => Promise.resolve().then(function () { return callback_get$3; });
 const _lazy_biY0Ub = () => Promise.resolve().then(function () { return kakao_get$1; });
+const _lazy_PgmA0y = () => Promise.resolve().then(function () { return callback_get$1; });
 const _lazy_suBpL6 = () => Promise.resolve().then(function () { return login_post$1; });
 const _lazy_LZXqH1 = () => Promise.resolve().then(function () { return logout_post$1; });
 const _lazy_99LL5w = () => Promise.resolve().then(function () { return register_post$1; });
@@ -1931,6 +1947,7 @@ const handlers = [
   { route: '/api/auth/google', handler: _lazy_6Djn2m, lazy: true, middleware: false, method: "get" },
   { route: '/api/auth/google/callback', handler: _lazy_6KkIuy, lazy: true, middleware: false, method: "get" },
   { route: '/api/auth/kakao', handler: _lazy_biY0Ub, lazy: true, middleware: false, method: "get" },
+  { route: '/api/auth/kakao/callback', handler: _lazy_PgmA0y, lazy: true, middleware: false, method: "get" },
   { route: '/api/auth/login', handler: _lazy_suBpL6, lazy: true, middleware: false, method: "post" },
   { route: '/api/auth/logout', handler: _lazy_LZXqH1, lazy: true, middleware: false, method: "post" },
   { route: '/api/auth/register', handler: _lazy_99LL5w, lazy: true, middleware: false, method: "post" },
@@ -2310,7 +2327,7 @@ const getDbPool = () => {
   return pool;
 };
 
-const callback_get = defineEventHandler(async (event) => {
+const callback_get$2 = defineEventHandler(async (event) => {
   const query = getQuery$1(event);
   const code = query.code;
   if (!code) {
@@ -2339,7 +2356,7 @@ const callback_get = defineEventHandler(async (event) => {
     if (!user) {
       const dummyPassword = "SOCIAL_LOGIN_USER";
       await pool.query(
-        "INSERT INTO nextict_tbl_user (userid, name, password) VALUES (?, ?, ?)",
+        "INSERT INTO nextict_tbl_user (userid, name, password, social) VALUES (?, ?, ?, 1)",
         [googleUser.email, googleUser.name || "GoogleUser", dummyPassword]
       );
       user = { userid: googleUser.email, name: googleUser.name };
@@ -2369,9 +2386,9 @@ const callback_get = defineEventHandler(async (event) => {
   }
 });
 
-const callback_get$1 = /*#__PURE__*/Object.freeze(/*#__PURE__*/Object.defineProperty({
+const callback_get$3 = /*#__PURE__*/Object.freeze(/*#__PURE__*/Object.defineProperty({
   __proto__: null,
-  default: callback_get
+  default: callback_get$2
 }, Symbol.toStringTag, { value: 'Module' }));
 
 const kakao_get = defineEventHandler(async (event) => {
@@ -2390,6 +2407,48 @@ const kakao_get = defineEventHandler(async (event) => {
 const kakao_get$1 = /*#__PURE__*/Object.freeze(/*#__PURE__*/Object.defineProperty({
   __proto__: null,
   default: kakao_get
+}, Symbol.toStringTag, { value: 'Module' }));
+
+const callback_get = defineEventHandler(async (event) => {
+  const code = getQuery$1(event).code;
+  if (!code) return sendRedirect(event, "/?error=no_code");
+  try {
+    const tokenRes = await $fetch("https://kauth.kakao.com/oauth/token", {
+      method: "POST",
+      headers: { "Content-type": "application/x-www-form-urlencoded;charset=utf-8" },
+      body: new URLSearchParams({
+        grant_type: "authorization_code",
+        client_id: process.env.KAKAO_REST_API_KEY,
+        redirect_uri: "http://localhost:3000/api/auth/kakao/callback",
+        code
+      })
+    });
+    const kakaoUser = await $fetch("https://kapi.kakao.com/v2/user/me", {
+      headers: { Authorization: `Bearer ${tokenRes.access_token}` }
+    });
+    const pool = getDbPool();
+    const [users] = await pool.query("SELECT * FROM nextict_tbl_user WHERE userid = ?", [kakaoUser.id.toString()]);
+    let user = users[0];
+    if (!user) {
+      await pool.query(
+        "INSERT INTO nextict_tbl_user (userid, name, password, social) VALUES (?, ?, ?, 2)",
+        [kakaoUser.id.toString(), kakaoUser.properties.nickname, "KAKAO_AUTH"]
+      );
+      user = { userid: kakaoUser.id.toString(), name: kakaoUser.properties.nickname };
+    }
+    const token = generateToken({ userid: user.userid, name: user.name });
+    setCookie(event, "auth_token", token, { maxAge: 60 * 60 * 24, path: "/" });
+    setCookie(event, "user_name", user.name, { maxAge: 60 * 60 * 24, path: "/" });
+    return sendRedirect(event, "/board/list");
+  } catch (error) {
+    console.error("Kakao Error:", error);
+    return sendRedirect(event, "/?error=kakao_failed");
+  }
+});
+
+const callback_get$1 = /*#__PURE__*/Object.freeze(/*#__PURE__*/Object.defineProperty({
+  __proto__: null,
+  default: callback_get
 }, Symbol.toStringTag, { value: 'Module' }));
 
 const login_post = defineEventHandler(async (event) => {
@@ -2498,7 +2557,7 @@ const register_post = defineEventHandler(async (event) => {
     const hashedPassword = await bcrypt.hash(body.password, 10);
     const hobbies = Array.isArray(body.hobbies) ? body.hobbies.join(",") : body.hobbies;
     await pool.query(
-      "INSERT INTO nextict_tbl_user (userid, name, password, email, job, hobbies, gender) VALUES (?, ?, ?, ?, ?, ?, ?)",
+      "INSERT INTO nextict_tbl_user (userid, name, password, email, job, hobbies, gender, social) VALUES (?, ?, ?, ?, ?, ?, ?, 0)",
       [body.userid, body.name, hashedPassword, body.email, body.job, hobbies, body.gender]
     );
     return {

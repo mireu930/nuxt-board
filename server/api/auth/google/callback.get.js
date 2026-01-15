@@ -42,7 +42,7 @@ export default defineEventHandler(async (event) => {
       // 비밀번호는 소셜 로그인이므로 랜덤값이나 특정 규약으로 저장 (로그인 시 사용 안 함)
       const dummyPassword = 'SOCIAL_LOGIN_USER'; 
       await pool.query(
-        'INSERT INTO nextict_tbl_user (userid, name, password) VALUES (?, ?, ?)',
+        'INSERT INTO nextict_tbl_user (userid, name, password, social) VALUES (?, ?, ?, 1)',
         [googleUser.email, googleUser.name || 'GoogleUser', dummyPassword]
       );
       user = { userid: googleUser.email, name: googleUser.name };
