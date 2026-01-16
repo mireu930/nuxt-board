@@ -1,5 +1,3 @@
-import { useRuntimeConfig } from "nuxt/app";
-
 // server/api/auth/google.get.js
 export default defineEventHandler(async (event) => {
   // 1. 구글 클라우드 콘솔에서 발급받은 정보

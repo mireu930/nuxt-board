@@ -1,4 +1,3 @@
-import { useRuntimeConfig } from 'nuxt/app';
 import { getDbPool } from '../../../utils/db';
 import { generateToken } from '../../../utils/jwt';
 
