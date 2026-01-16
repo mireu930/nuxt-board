@@ -1,7 +1,7 @@
 // server/api/auth/kakao.get.js
 export default defineEventHandler(async (event) => {
   const restApiKey = 'cf597e39aa8b460de022df377243f819';
-  const redirectUri = 'http://localhost:3000/api/auth/kakao/callback';
+  const redirectUri = 'https://www.nextboard.kro.kr/api/auth/kakao/callback';
   
   const kakaoAuthUrl = 'https://kauth.kakao.com/oauth/authorize';
   

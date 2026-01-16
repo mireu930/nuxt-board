@@ -4,7 +4,7 @@ export default defineEventHandler(async (event) => {
   // 실제 서비스라면 nuxt.config.ts나 .env에서 가져오는 것이 좋지만, 
   // 테스트를 위해 직접 입력하셔도 됩니다.
   const clientId = process.env.YOUR_GOOGLE_CLIENT_ID || '701767528169-4h2oqq8qnjgputbjrncjd3fhdlt1k3dp.apps.googleusercontent.com';
-  const redirectUri = 'http://localhost:3000/api/auth/google/callback';
+  const redirectUri = 'https://www.nextboard.kro.kr/api/auth/google/callback';
 
   const rootUrl = 'https://accounts.google.com/o/oauth2/v2/auth';
   

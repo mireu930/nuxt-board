@@ -17,7 +17,7 @@ export default defineEventHandler(async (event) => {
         code,
         client_id: process.env.YOUR_GOOGLE_CLIENT_ID + '.apps.googleusercontent.com',
         client_secret: process.env.YOUR_GOOGLE_CLIENT_SECRET, 
-        redirect_uri: 'http://localhost:3000/api/auth/google/callback',
+        redirect_uri: 'https://www.nextboard.kro.kr/api/auth/google/callback',
         grant_type: 'authorization_code',
       },
     });

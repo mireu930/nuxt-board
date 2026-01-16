@@ -13,7 +13,7 @@ export default defineEventHandler(async (event) => {
       body: new URLSearchParams({
         grant_type: 'authorization_code',
         client_id: process.env.KAKAO_REST_API_KEY,
-        redirect_uri: 'http://localhost:3000/api/auth/kakao/callback',
+        redirect_uri: 'https://www.nextboard.kro.kr/api/auth/kakao/callback',
         code
       })
     });

@@ -157,7 +157,7 @@ const handleLogout = async () => {
 
     if (response.socialType === '2' || response.socialType === 'kakao') {
       const restApiKey = response.kakaoApiKey;
-      const logoutRedirectUri = 'http://localhost:3000/api/auth/kakao/logout-callback';
+      const logoutRedirectUri = 'http://www.nextboard.kro.kr/api/auth/kakao/logout-callback';
       
       window.location.href = `https://kauth.kakao.com/oauth/logout?client_id=${restApiKey}&logout_redirect_uri=${logoutRedirectUri}`;
       return;
