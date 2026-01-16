@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import { shallowReactive, reactive, effectScope, getCurrentScope, hasInjectionContext, getCurrentInstance, inject, toRef, shallowRef, isReadonly, isRef, isShallow, isReactive, toRaw, defineComponent, provide, h, ref, Suspense, Fragment, useSSRContext, defineAsyncComponent, unref, mergeProps, onErrorCaptured, onServerPrefetch, createVNode, resolveDynamicComponent, createApp } from "vue";
 import { $fetch } from "C:/my-app/nuxt-board/node_modules/ofetch/dist/node.mjs";
 import { baseURL } from "#internal/nuxt/paths";
@@ -1023,3 +1024,6 @@ export {
   useRouter as u
 };
 //# sourceMappingURL=server.mjs.map
+=======
+export { default } from "file:///Users/minyeollee/Desktop/nuxt-board/node_modules/@nuxt/vite-builder/dist/runtime/vite-node.mjs"
+>>>>>>> 356585246299ab327e9315dbe6cf61f3d9544111
