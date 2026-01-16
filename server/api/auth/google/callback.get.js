@@ -16,7 +16,7 @@ export default defineEventHandler(async (event) => {
       method: 'POST',
       body: {
         code,
-        client_id: config.public.googleClientId + '.apps.googleusercontent.com',
+        client_id: config.public.googleClientId,
         client_secret: config.googleClientSecret, 
         redirect_uri: 'https://www.nextboard.kro.kr/api/auth/google/callback',
         grant_type: 'authorization_code',

@@ -13,7 +13,6 @@ export default defineNuxtConfig({
     // 2. 브라우저에도 공개되는 키 (Public)
     public: {
       googleClientId: '',       // NUXT_PUBLIC_GOOGLE_CLIENT_ID 와 매핑
-      siteUrl: '',              // NUXT_PUBLIC_SITE_URL (선택사항)
     }
   }
 })
