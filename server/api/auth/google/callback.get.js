@@ -1,3 +1,4 @@
+import { useRuntimeConfig } from 'nuxt/app';
 import { getDbPool } from '../../../utils/db';
 import { generateToken } from '../../../utils/jwt';
 
@@ -10,13 +11,14 @@ export default defineEventHandler(async (event) => {
   }
 
   try {
+    const config = useRuntimeConfig();
     // 1. 구글 토큰 교환 (클라이언트 시크릿은 .env에 넣어주세요)
     const tokenResponse = await $fetch('https://oauth2.googleapis.com/token', {
       method: 'POST',
       body: {
         code,
-        client_id: process.env.YOUR_GOOGLE_CLIENT_ID + '.apps.googleusercontent.com',
-        client_secret: process.env.YOUR_GOOGLE_CLIENT_SECRET, 
+        client_id: config.public.googleClientId + '.apps.googleusercontent.com',
+        client_secret: config.googleClientSecret, 
         redirect_uri: 'https://www.nextboard.kro.kr/api/auth/google/callback',
         grant_type: 'authorization_code',
       },

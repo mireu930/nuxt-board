@@ -1,9 +1,13 @@
+import { useRuntimeConfig } from "nuxt/app";
+
 // server/api/auth/google.get.js
 export default defineEventHandler(async (event) => {
   // 1. 구글 클라우드 콘솔에서 발급받은 정보
   // 실제 서비스라면 nuxt.config.ts나 .env에서 가져오는 것이 좋지만, 
   // 테스트를 위해 직접 입력하셔도 됩니다.
-  const clientId = process.env.YOUR_GOOGLE_CLIENT_ID || '701767528169-4h2oqq8qnjgputbjrncjd3fhdlt1k3dp.apps.googleusercontent.com';
+  const config = useRuntimeConfig();
+
+  const clientId = config.public.googleClientId;
   const redirectUri = 'https://www.nextboard.kro.kr/api/auth/google/callback';
 
   const rootUrl = 'https://accounts.google.com/o/oauth2/v2/auth';
