@@ -1,13 +1,27 @@
 // server/api/auth/google.get.js
 export default defineEventHandler(async (event) => {
-  // 1. 구글 클라우드 콘솔에서 발급받은 정보
-  // 실제 서비스라면 nuxt.config.ts나 .env에서 가져오는 것이 좋지만, 
-  // 테스트를 위해 직접 입력하셔도 됩니다.
   const config = useRuntimeConfig();
 
-  const clientId = config.public.googleClientId;
-  const redirectUri = 'https://www.nextboard.kro.kr/api/auth/google/callback';
+  // 🔥 [디버깅] 서버 로그 찍기 (Amplify CloudWatch에서 확인 가능)
+  console.log('--------------------------------------------------');
+  console.log('👉 [DEBUG] Public Config:', config.public);
+  console.log('👉 [DEBUG] Client ID:', config.public.googleClientId);
+  console.log('👉 [DEBUG] Process Env Check:', process.env.NUXT_PUBLIC_GOOGLE_CLIENT_ID);
+  console.log('--------------------------------------------------');
 
+  const clientId = config.public.googleClientId;
+  
+  // 1. ID가 없으면 에러 페이지 대신 명확한 메시지 출력 (구글로 안 보냄)
+  if (!clientId) {
+    return {
+      error: "Configuration Error",
+      message: "Client ID is missing on Server!",
+      debug_hint: "Check Amplify Environment Variables",
+      received_value: clientId
+    };
+  }
+
+  const redirectUri = 'https://www.nextboard.kro.kr/api/auth/google/callback';
   const rootUrl = 'https://accounts.google.com/o/oauth2/v2/auth';
   
   const options = {
@@ -19,9 +33,7 @@ export default defineEventHandler(async (event) => {
     prompt: 'consent'
   };
 
-  // 2. URL 파라미터 생성
   const queryString = new URLSearchParams(options).toString();
   
-  // 3. 구글 인증 페이지로 리다이렉트
   return sendRedirect(event, `${rootUrl}?${queryString}`);
 });
