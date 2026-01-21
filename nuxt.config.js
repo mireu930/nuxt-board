@@ -1,18 +1,16 @@
-// export default defineNuxtConfig({
-//   devtools: { enabled: true }
-// })
+// nuxt.config.ts
 export default defineNuxtConfig({
   devtools: { enabled: true },
 
   runtimeConfig: {
-    // 1. 서버에서만 필요한 비밀키 (Private)
-    jwtSecret: '',              // NUXT_JWT_SECRET 와 매핑
-    googleClientSecret: '',     // NUXT_GOOGLE_CLIENT_SECRET 와 매핑
-    kakaoRestApiKey: '',        // NUXT_KAKAO_REST_API_KEY 와 매핑
+    // 1. Private (서버용) - process.env로 직접 연결
+    jwtSecret: process.env.NUXT_JWT_SECRET,
+    googleClientSecret: process.env.NUXT_GOOGLE_CLIENT_SECRET,
+    kakaoRestApiKey: process.env.NUXT_KAKAO_REST_API_KEY,
 
-    // 2. 브라우저에도 공개되는 키 (Public)
+    // 2. Public (브라우저용) - process.env로 직접 연결
     public: {
-      googleClientId: '',       // NUXT_PUBLIC_GOOGLE_CLIENT_ID 와 매핑
+      googleClientId: process.env.NUXT_PUBLIC_GOOGLE_CLIENT_ID,
     }
   }
 })
