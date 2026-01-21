@@ -2,6 +2,7 @@ import { getDbPool } from '../../utils/db';
 
 export default defineEventHandler(async (event) => {
   // 쿠키에서 현재 사용자 ID 추출
+  const config = useRuntimeConfig();
   const userId = getCookie(event, 'user_id');
   let socialType; // 기본값 (일반)
 
@@ -30,6 +31,6 @@ export default defineEventHandler(async (event) => {
   return {
     success: true,
     socialType: socialType,
-    kakaoApiKey: process.env.KAKAO_REST_API_KEY
+    kakaoApiKey: config.kakaoRestApiKey
   };
 });

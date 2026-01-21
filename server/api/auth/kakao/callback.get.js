@@ -6,13 +6,14 @@ export default defineEventHandler(async (event) => {
   if (!code) return sendRedirect(event, '/?error=no_code');
 
   try {
+    const config = useRuntimeConfig();
     // 1. 카카오 토큰 받기
     const tokenRes = await $fetch('https://kauth.kakao.com/oauth/token', {
       method: 'POST',
       headers: { 'Content-type': 'application/x-www-form-urlencoded;charset=utf-8' },
       body: new URLSearchParams({
         grant_type: 'authorization_code',
-        client_id: process.env.KAKAO_REST_API_KEY,
+        client_id: config.kakaoRestApiKey,
         redirect_uri: 'https://www.nextboard.kro.kr/api/auth/kakao/callback',
         code
       })
